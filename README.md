@@ -22,6 +22,14 @@ Instale as dependências:
 npm install
 ```
 
+## Configuração Prisma IO
+
+Inicialize o Prisma com PostgreSQL:
+
+```bash
+npx prisma init --datasource-provider postgresql
+```
+
 ## Dependências
 
 ### Produção
