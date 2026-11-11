@@ -1,0 +1,16 @@
+services:
+  db:
+    image: postgres:17
+    container_name: apidb
+    restart: always
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: postgresql
+      POSTGRES_DB: apidb
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:
