@@ -3,7 +3,23 @@ import { prisma } from "@/prisma";
 
 class QuestionsController {
   async index(request: Request, response: Response) {
-    return response.json();
+    const title = typeof request.query.title === "string" ? request.query.title.trim() : undefined;
+    const content = typeof request.query.content === "string" ? request.query.content.trim() : undefined;
+
+    const questions = await prisma.questions.findMany({
+      where: {
+        ...(title && {
+          title: { contains: title, mode: "insensitive" }
+        }),
+        ...(content && {
+          content: { contains: content, mode: "insensitive" }
+        })
+      },
+      orderBy: {
+        title: "asc"
+      }
+    });
+    return response.json(questions);
   }
 
   async create(request: Request, response: Response) {
