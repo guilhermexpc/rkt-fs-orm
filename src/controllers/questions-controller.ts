@@ -53,6 +53,13 @@ class QuestionsController {
   }
 
   async remove(request: Request, response: Response) {
+    const { id } = request.params;
+    await prisma.questions.delete({
+      where: {
+        id
+      }
+    });
+
     return response.json();
   }
 }
